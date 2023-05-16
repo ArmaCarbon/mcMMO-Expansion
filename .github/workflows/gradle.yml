@@ -30,3 +30,9 @@ jobs:
       uses: gradle/gradle-build-action@v2.4.2
       with:
         arguments: build
+
+    - name: Upload Plugin
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: mcmmo-placeholders
+        path: build/libs/*.jar

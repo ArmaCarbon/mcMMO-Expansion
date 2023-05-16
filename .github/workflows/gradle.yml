@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ master ]
+    branches: [ '*' ]
 
 permissions:
   contents: read
@@ -22,13 +22,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2.1.5
-      with:
-        arguments: build
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2.4.2
+        with:
+          arguments: build
+
+      - name: Upload Plugin
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: mcmmo-placeholders
+          path: mcmmo-placeholders-plugin/build/libs/*.jar

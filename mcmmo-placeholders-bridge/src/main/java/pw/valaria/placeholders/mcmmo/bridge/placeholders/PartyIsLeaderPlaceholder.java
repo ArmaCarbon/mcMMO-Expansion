@@ -18,6 +18,9 @@ public class PartyIsLeaderPlaceholder implements Placeholder {
     @Override
     public String process(Player player, String params) {
         String leader = bridge.getPartyLeader(player);
+        if (leader == null) {
+            return "false";
+        }
         return (leader.equals(player.getName())) ? "true" : "false";
     }
 

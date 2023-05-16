@@ -9,9 +9,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 permissions:
   contents: read
@@ -29,6 +27,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2.1.5
+      uses: gradle/gradle-build-action@v2.4.2
       with:
         arguments: build

@@ -2,12 +2,12 @@
 allprojects {
 
     group = 'pw.valaria'
-    version = '1.0.3'
+    version = '1.0.3-SNAPSHOT'
 }
 
 subprojects {
     apply plugin:'java'
-    sourceCompatibility = 16
+    sourceCompatibility = 1.8
     repositories {
         mavenCentral()
         maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'}

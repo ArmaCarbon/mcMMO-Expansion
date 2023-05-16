@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 
 import pw.valaria.placeholders.mcmmo.bridge.data.ISkillType;
+import pw.valaria.placeholders.mcmmo.bridge.data.LeaderboardStat;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.PartyIsLeaderPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.PartyIsMemberPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.PartyLeaderPlaceholder;
@@ -17,6 +18,7 @@ import pw.valaria.placeholders.mcmmo.bridge.placeholders.PowerLevelPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillExpNeededPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillExpPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillExpRemainingPlaceholder;
+import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillLeaderboardPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillLevelPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillRankPlaceholder;
 import pw.valaria.placeholders.mcmmo.bridge.placeholders.SkillXpRatePlaceholder;
@@ -25,6 +27,7 @@ import pw.valaria.placeholders.mcmmo.bridge.placeholders.XpRatePlaceholder;
 
 public abstract class McmmoBridge<S extends ISkillType> {
     McMMOPlaceholderExpansion expansion;
+
     /**
      * @return Can this IMPL hook the current version of mcmmo
      */
@@ -43,24 +46,26 @@ public abstract class McmmoBridge<S extends ISkillType> {
             // %mcmmo_level_<skillname>%
             getExpansion().registerPlaceholder(new SkillLevelPlaceholder(this, skill));
 
-            //%mcmmo_xp_needed_<skillname>%
+            // %mcmmo_xp_needed_<skillname>%
             getExpansion().registerPlaceholder(new SkillExpNeededPlaceholder(this, skill));
 
-            //%mcmmo_xp_<skillname>%
+            // %mcmmo_xp_<skillname>%
             getExpansion().registerPlaceholder(new SkillExpPlaceholder(this, skill));
 
-            //%mcmmo_xp_remaining_<skillname>%
+            // %mcmmo_xp_remaining_<skillname>%
             getExpansion().registerPlaceholder(new SkillExpRemainingPlaceholder(this, skill));
 
-            //%mcmmo_rank_<skillname>%
+            // %mcmmo_rank_<skillname>%
             getExpansion().registerPlaceholder(new SkillRankPlaceholder(this, skill));
 
-            //%mcmmo_xprate_<skillname>%
+            // %mcmmo_xprate_<skillname>%
             getExpansion().registerPlaceholder(new SkillXpRatePlaceholder(this, skill));
+
+            // %mcmmo_top_rank_<skillname>%
+            getExpansion().registerPlaceholder(new SkillLeaderboardPlaceholder(this, skill));
         });
 
-
-        //%mcmmo_power_level%
+        // %mcmmo_power_level%
         getExpansion().registerPlaceholder(new PowerLevelPlaceholder(this));
 
         // %mcmmo_power_level_cap%
@@ -130,4 +135,6 @@ public abstract class McmmoBridge<S extends ISkillType> {
     public abstract String getSkillXpRate(ISkillType skill, Player player);
 
     public abstract String isExpEventActive(Player player);
+
+    public abstract LeaderboardStat getLeaderboardStat(ISkillType type, int rank);
 }

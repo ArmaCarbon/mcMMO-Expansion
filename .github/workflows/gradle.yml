@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: mcmmo-placeholders
-        path: mcmmo-placeholders/build/libs/*.jar
+        path: build/libs/*.jar
